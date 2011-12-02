@@ -19,12 +19,10 @@
 @class GKTestViewController;
 
 @interface GKTestAppDelegate : NSObject <UIApplicationDelegate>
-{
-}
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet GKTestViewController *gkViewController;
-@property (nonatomic, readonly) GKSession *gkSession;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) GKTestViewController *gkViewController;
+@property (nonatomic, strong) GKSession *gkSession;
 
 @end
 

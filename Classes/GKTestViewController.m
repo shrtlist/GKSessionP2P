@@ -17,22 +17,16 @@
 #import "GKTestViewController.h"
 #import "GKTestAppDelegate.h"
 
-@interface GKTestViewController ()
-
-#pragma mark -
-#pragma mark Private method
+@interface GKTestViewController () // Class extension
 - (NSArray *)getConnectedPeers;
-
 @end
-
 
 @implementation GKTestViewController
 
 @synthesize navBar;
 @synthesize peerTableView;
 
-#pragma mark -
-#pragma mark Initialization and teardown
+#pragma mark - Initialization and teardown
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -54,21 +48,7 @@
 	[super viewDidUnload];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc
-{
-	[peerTableView release];
-	[navBar release];
-
-    [super dealloc];
-}
-
-#pragma mark -
-#pragma mark GKSessionDelegate protocol methods
+#pragma mark - GKSessionDelegate protocol methods
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state
 {	
@@ -76,7 +56,7 @@
 	{
 		case GKPeerStateAvailable:
 			NSLog(@"didChangeState: peer %@ available", [session displayNameForPeer:peerID]);
-			[session connectToPeer:peerID withTimeout:10];
+			[session connectToPeer:peerID withTimeout:5];
 			break;
 			
 		case GKPeerStateUnavailable:
@@ -118,8 +98,7 @@
 	[session disconnectFromAllPeers];
 }
 
-#pragma mark -
-#pragma mark UITableViewDataSource protocol methods
+#pragma mark - UITableViewDataSource protocol methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -147,7 +126,7 @@
 	
 	if (cell == nil)
     {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier] autorelease];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
 	}
 	
 	NSArray *peers = [self getConnectedPeers];
@@ -166,18 +145,7 @@
 	return cell;
 }
 
-#pragma mark -
-#pragma mark UITableViewDelegate protocol method
-
-//	 To conform to the Human Interface Guidelines, selections should not be persistent --
-//	 deselect the row after it has been selected.
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark -
-#pragma mark Get connected peers
+#pragma mark - Get connected peers
 
 - (NSArray *)getConnectedPeers
 {
