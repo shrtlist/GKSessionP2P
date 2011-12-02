@@ -18,13 +18,15 @@
 #import "GKTestAppDelegate.h"
 
 @interface GKTestViewController () // Class extension
+- (NSArray *)getAvailablePeers;
 - (NSArray *)getConnectedPeers;
 @end
 
 @implementation GKTestViewController
 
-@synthesize navBar;
+@synthesize gkSession;
 @synthesize peerTableView;
+@synthesize navBar;
 
 #pragma mark - Initialization and teardown
 
@@ -34,15 +36,14 @@
     [super viewDidLoad];
 	
 	GKTestAppDelegate *appDelegate = (GKTestAppDelegate *)[[UIApplication sharedApplication] delegate];
-	GKSession *gkSession = appDelegate.gkSession;
-	
+	self.gkSession = appDelegate.gkSession;
+
 	navBar.topItem.title = gkSession.displayName;
 }
 
 - (void)viewDidUnload
 {
 	// Release any retained subviews of the main view.
-	self.peerTableView = nil;
 	self.navBar = nil;
 	
 	[super viewDidUnload];
@@ -102,24 +103,53 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 1;
+	return 2;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{    
+    NSString *headerTitle = nil;
+
+    switch (section) {
+        case 0:
+            headerTitle = @"GKSession Connected Peers";
+            break;
+            
+        case 1:
+            headerTitle = @"GKSession Available Peers";
+            break;
+    }
 	
-	return @"GKSession Connected Peers";
+	return headerTitle;
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
-{	
-	NSArray *peers = [self getConnectedPeers];
-	return peers.count;
+{
+    NSInteger rowsInSection;
+
+    switch (section) {
+        case 0:
+        {
+            NSArray *peers = [self getConnectedPeers];
+            rowsInSection = peers.count;
+            break;
+        }   
+        case 1:
+        {
+            NSArray *peers = [self getAvailablePeers];
+            rowsInSection = peers.count;
+            break;
+        }
+    }
+
+	return rowsInSection;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString *kCellIdentifier = @"Cell";
 	
+    NSInteger section = [indexPath section];
 	NSInteger row = [indexPath row];
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
@@ -128,30 +158,36 @@
     {
 		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
 	}
-	
-	NSArray *peers = [self getConnectedPeers];
+
+	NSArray *peers = nil;
+
+    if (section == 0) {
+        peers = [self getConnectedPeers];
+    }
+    else
+    {
+        peers = [self getAvailablePeers];
+    }
+    
 	NSString *peerID = [peers objectAtIndex:row];
 	
 	if (peerID)
     {
-		GKTestAppDelegate *appDelegate = (GKTestAppDelegate *)[[UIApplication sharedApplication] delegate];
-		GKSession *gkSession = appDelegate.gkSession;
-		
 		cell.textLabel.text = [gkSession displayNameForPeer:peerID];
 	}
-	
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	return cell;
 }
 
-#pragma mark - Get connected peers
+#pragma mark - Get available and connected peers
+
+- (NSArray *)getAvailablePeers
+{    
+	return [gkSession peersWithConnectionState:GKPeerStateAvailable];
+}
 
 - (NSArray *)getConnectedPeers
 {
-	GKTestAppDelegate *appDelegate = (GKTestAppDelegate *)[[UIApplication sharedApplication] delegate];
-	GKSession *gkSession = appDelegate.gkSession;
-
 	return [gkSession peersWithConnectionState:GKPeerStateConnected];
 }
 
