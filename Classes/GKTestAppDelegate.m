@@ -28,11 +28,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {        
     // Override point for customization after application launch.
-	self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
-	gkSession.delegate = gkViewController;
-    gkSession.disconnectTimeout = 5;
-	gkSession.available = YES;
-	
 	[self.window addSubview:gkViewController.view];
     [self.window makeKeyAndVisible];
 
@@ -62,7 +57,6 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
-    gkSession.available = YES;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -70,14 +64,15 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
+	gkSession.delegate = gkViewController;
+    gkSession.disconnectTimeout = 5;
+	gkSession.available = YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-	[gkSession disconnectFromAllPeers];
-	gkSession.available = NO;
-	[gkSession setDataReceiveHandler:nil withContext:nil];
-	gkSession.delegate = nil;
+	NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 @end

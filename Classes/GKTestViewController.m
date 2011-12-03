@@ -34,11 +34,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-	GKTestAppDelegate *appDelegate = (GKTestAppDelegate *)[[UIApplication sharedApplication] delegate];
-	self.gkSession = appDelegate.gkSession;
 
 	navBar.topItem.title = gkSession.displayName;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+	GKTestAppDelegate *appDelegate = (GKTestAppDelegate *)[[UIApplication sharedApplication] delegate];
+	self.gkSession = appDelegate.gkSession;
 }
 
 - (void)viewDidUnload
