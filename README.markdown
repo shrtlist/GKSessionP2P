@@ -1,7 +1,7 @@
 # GameKitP2P
 
 ## Features
-A demo app that illustrates the ad-hoc networking features of iOS GameKit. The app both advertises itself 
+A demo app that illustrates the ad-hoc networking features of iOS GKSession. The app both advertises itself 
 on the local network and automatically connects to available peers, establishing a peer-to-peer network.
 
 You'll need to run at least to instances of the app to set up a P2P network. Build the application using 
