@@ -20,15 +20,26 @@
 @implementation GKTestAppDelegate
 
 @synthesize window;
-@synthesize gkViewController;
+@synthesize gkTestViewController;
 @synthesize gkSession;
 
 #pragma mark - Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{        
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
     // Override point for customization after application launch.
-	[self.window addSubview:gkViewController.view];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        self.gkTestViewController = [[GKTestViewController alloc] initWithNibName:@"GKTestViewController_iPhone" bundle:nil];
+    }
+    else
+    {
+        self.gkTestViewController = [[GKTestViewController alloc] initWithNibName:@"GKTestViewController_iPad" bundle:nil];
+    }
+
+    self.window.rootViewController = self.gkTestViewController;
     [self.window makeKeyAndVisible];
 
     return YES;
@@ -65,7 +76,7 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
-	gkSession.delegate = gkViewController;
+	gkSession.delegate = gkTestViewController;
     gkSession.disconnectTimeout = 5;
 	gkSession.available = YES;
 }

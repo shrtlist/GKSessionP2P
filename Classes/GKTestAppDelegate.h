@@ -21,7 +21,7 @@
 @interface GKTestAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) GKTestViewController *gkViewController;
+@property (nonatomic, strong) GKTestViewController *gkTestViewController;
 @property (nonatomic, strong) GKSession *gkSession;
 
 @end

@@ -53,6 +53,19 @@
 	[super viewDidUnload];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+    {
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    }
+    else
+    {
+        return YES;
+    }
+}
+
 #pragma mark - GKSessionDelegate protocol methods
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state
@@ -61,6 +74,9 @@
 	{
 		case GKPeerStateAvailable:
 			NSLog(@"didChangeState: peer %@ available", [session displayNameForPeer:peerID]);
+            
+            [NSThread sleepForTimeInterval:0.5];
+            
 			[session connectToPeer:peerID withTimeout:5];
 			break;
 			
@@ -87,7 +103,7 @@
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
 {
 	NSLog(@"didReceiveConnectionRequestFromPeer: %@", [session displayNameForPeer:peerID]);
-	
+
 	[session acceptConnectionFromPeer:peerID error:nil];
 }
 
