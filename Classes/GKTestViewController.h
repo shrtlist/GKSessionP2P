@@ -18,8 +18,8 @@
 
 @interface GKTestViewController : UIViewController <GKSessionDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong ) GKSession *gkSession;
-@property (nonatomic, strong) IBOutlet UITableView *peerTableView;
+@property (nonatomic, strong) GKSession *gkSession;
 @property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, strong) IBOutlet UITableView *peerTableView;
 
 @end

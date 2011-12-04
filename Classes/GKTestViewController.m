@@ -17,32 +17,40 @@
 #import "GKTestViewController.h"
 #import "GKTestAppDelegate.h"
 
-@interface GKTestViewController () // Class extension
-- (NSArray *)getAvailablePeers;
-- (NSArray *)getConnectedPeers;
-@end
-
 @implementation GKTestViewController
 
 @synthesize gkSession;
 @synthesize peerTableView;
 @synthesize navBar;
 
-#pragma mark - Initialization and teardown
+#pragma mark - GKSession setup and teardown
 
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)setupSession
+{
+    self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
+    gkSession.delegate = self;
+    gkSession.disconnectTimeout = 5;
+    gkSession.available = YES;
+
+	navBar.topItem.title = [NSString stringWithFormat:@"GKSession: %@", gkSession.displayName];
+}
+
+- (void)teardownSession
+{
+    gkSession.available = NO;
+    gkSession.delegate = nil;
+    [gkSession disconnectFromAllPeers];
+}
+
+#pragma mark - View lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-	navBar.topItem.title = gkSession.displayName;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     
-	GKTestAppDelegate *appDelegate = (GKTestAppDelegate *)[[UIApplication sharedApplication] delegate];
-	self.gkSession = appDelegate.gkSession;
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(setupSession) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [defaultCenter addObserver:self selector:@selector(teardownSession) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -67,6 +75,11 @@
     }
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - GKSessionDelegate protocol methods
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state
@@ -75,9 +88,9 @@
 	{
 		case GKPeerStateAvailable:
 			NSLog(@"didChangeState: peer %@ available", [session displayNameForPeer:peerID]);
-            
+
             [NSThread sleepForTimeInterval:0.5];
-            
+
 			[session connectToPeer:peerID withTimeout:5];
 			break;
 			
@@ -105,39 +118,59 @@
 {
 	NSLog(@"didReceiveConnectionRequestFromPeer: %@", [session displayNameForPeer:peerID]);
 
-	[session acceptConnectionFromPeer:peerID error:nil];
+    [session acceptConnectionFromPeer:peerID error:nil];
+	
+	[peerTableView reloadData];
 }
 
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
-	NSLog(@"connectionWithPeerFailed: session: %@ peer: %@, error: %@", session, [session displayNameForPeer:peerID], error);
+	NSLog(@"connectionWithPeerFailed: peer: %@, error: %@", [session displayNameForPeer:peerID], error);
+	
+	[peerTableView reloadData];
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error
 {
-	NSLog(@"didFailWithError: session: %@, error: %@", session, error);
+	NSLog(@"didFailWithError: error: %@", error);
 	
 	[session disconnectFromAllPeers];
+	
+	[peerTableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource protocol methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return 2;
+	return 5;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {    
     NSString *headerTitle = nil;
+    
+    NSInteger state = section;
 
-    switch (section) {
-        case 0:
-            headerTitle = @"GKSession Connected Peers";
+    switch (state) {
+        case GKPeerStateAvailable:
+            headerTitle = @"Available Peers";
             break;
             
-        case 1:
-            headerTitle = @"GKSession Available Peers";
+        case GKPeerStateConnecting:
+            headerTitle = @"Connecting Peers";
+            break;
+
+        case GKPeerStateConnected:
+            headerTitle = @"Connected Peers";
+            break;
+            
+        case GKPeerStateDisconnected:
+            headerTitle = @"Disconnected Peers";
+            break;
+            
+        case GKPeerStateUnavailable:
+            headerTitle = @"Unavailable Peers";
             break;
     }
 	
@@ -146,31 +179,47 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rowsInSection;
+    // Always show at least 1 row.
+    NSInteger rows = 1;
+    
+    NSArray *peers = nil;
 
-    switch (section) {
-        case 0:
-        {
-            NSArray *peers = [self getConnectedPeers];
-            rowsInSection = peers.count;
+    NSInteger state = section;
+
+    switch (state) {
+        case GKPeerStateAvailable:
+            peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
             break;
-        }   
-        case 1:
-        {
-            NSArray *peers = [self getAvailablePeers];
-            rowsInSection = peers.count;
+
+        case GKPeerStateConnecting:
+            peers = [gkSession peersWithConnectionState:GKPeerStateConnecting];
             break;
-        }
+            
+        case GKPeerStateConnected:
+            peers = [gkSession peersWithConnectionState:GKPeerStateConnected];
+            break;
+            
+        case GKPeerStateDisconnected:
+            peers = [gkSession peersWithConnectionState:GKPeerStateDisconnected];
+            break;
+            
+        case GKPeerStateUnavailable:
+            peers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
+            break;
+    }
+    
+    if (peers.count > 0) {
+        rows = peers.count;
     }
 
-	return rowsInSection;
+	return rows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	static NSString *kCellIdentifier = @"Cell";
 	
-    NSInteger section = [indexPath section];
+    NSInteger state = [indexPath section];
 	NSInteger row = [indexPath row];
 	
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
@@ -182,34 +231,43 @@
 
 	NSArray *peers = nil;
 
-    if (section == 0) {
-        peers = [self getConnectedPeers];
+    switch (state) {
+        case GKPeerStateAvailable:
+            peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
+            break;
+            
+        case GKPeerStateConnecting:
+            peers = [gkSession peersWithConnectionState:GKPeerStateConnecting];
+            break;
+            
+        case GKPeerStateConnected:
+            peers = [gkSession peersWithConnectionState:GKPeerStateConnected];
+            break;
+            
+        case GKPeerStateDisconnected:
+            peers = [gkSession peersWithConnectionState:GKPeerStateDisconnected];
+            break;
+            
+        case GKPeerStateUnavailable:
+            peers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
+            break;
+    }
+    
+    if (peers.count > 0)
+    {
+        NSString *peerID = [peers objectAtIndex:row];
+        
+        if (peerID)
+        {
+            cell.textLabel.text = [gkSession displayNameForPeer:peerID];
+        }
     }
     else
     {
-        peers = [self getAvailablePeers];
+        cell.textLabel.text = @"None";
     }
-    
-	NSString *peerID = [peers objectAtIndex:row];
-	
-	if (peerID)
-    {
-		cell.textLabel.text = [gkSession displayNameForPeer:peerID];
-	}
 	
 	return cell;
-}
-
-#pragma mark - Get available and connected peers
-
-- (NSArray *)getAvailablePeers
-{    
-	return [gkSession peersWithConnectionState:GKPeerStateAvailable];
-}
-
-- (NSArray *)getConnectedPeers
-{
-	return [gkSession peersWithConnectionState:GKPeerStateConnected];
 }
 
 @end

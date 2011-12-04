@@ -21,14 +21,11 @@
 
 @synthesize window;
 @synthesize gkTestViewController;
-@synthesize gkSession;
 
 #pragma mark - Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"%@", NSStringFromSelector(_cmd));
-
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // Override point for customization after application launch.
@@ -63,9 +60,6 @@
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     NSLog(@"%@", NSStringFromSelector(_cmd));
-
-	[gkSession disconnectFromAllPeers];
-	gkSession.available = NO;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -82,11 +76,6 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     NSLog(@"%@", NSStringFromSelector(_cmd));
-
-    self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
-	gkSession.delegate = gkTestViewController;
-    gkSession.disconnectTimeout = 5;
-	gkSession.available = YES;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

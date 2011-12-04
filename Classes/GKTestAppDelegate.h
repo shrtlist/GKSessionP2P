@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-#import <GameKit/GameKit.h>
-
 @class GKTestViewController;
 
 @interface GKTestAppDelegate : NSObject <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) GKTestViewController *gkTestViewController;
-@property (nonatomic, strong) GKSession *gkSession;
 
 @end
 
