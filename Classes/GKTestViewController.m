@@ -49,6 +49,7 @@
 {
 	// Release any retained subviews of the main view.
 	self.navBar = nil;
+    self.peerTableView = nil;
 	
 	[super viewDidUnload];
 }
