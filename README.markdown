@@ -1,4 +1,4 @@
-# GameKitP2P
+# GKSessionP2P
 
 ## Features
 A demo app that illustrates the ad-hoc networking features of iOS GKSession. The app both advertises itself 
@@ -11,10 +11,10 @@ peers will appear in the peer list.
 
 
 ## BUILD REQUIREMENTS:
-iPhone OS 3.1
+iPhone OS 4.0
 
 ## RUNTIME REQUIREMENTS:
-iPhone OS 3.1
+iPhone OS 4.0
 
 ## License
 The source code is available under the Apache License, Version 2.0
