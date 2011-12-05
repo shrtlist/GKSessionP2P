@@ -19,7 +19,6 @@
 @interface GKTestAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) GKTestViewController *gkTestViewController;
 
 @end
 
