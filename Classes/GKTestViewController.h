@@ -16,10 +16,8 @@
 
 #import <GameKit/GameKit.h>
 
-@interface GKTestViewController : UIViewController <GKSessionDelegate, UITableViewDataSource>
+@interface GKTestViewController : UITableViewController <GKSessionDelegate>
 
 @property (nonatomic, strong) GKSession *gkSession;
-@property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, strong) IBOutlet UITableView *peerTableView;
 
 @end

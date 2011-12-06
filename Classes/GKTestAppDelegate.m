@@ -24,17 +24,23 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    GKTestViewController *viewController = nil;
 
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
     {
-        window.rootViewController = [[GKTestViewController alloc] initWithNibName:@"GKTestViewController_iPhone" bundle:nil];
+        viewController = [[GKTestViewController alloc] initWithNibName:@"GKTestViewController_iPhone" bundle:nil];
     }
     else
     {
-        window.rootViewController = [[GKTestViewController alloc] initWithNibName:@"GKTestViewController_iPad" bundle:nil];
+        viewController = [[GKTestViewController alloc] initWithNibName:@"GKTestViewController_iPad" bundle:nil];
     }
+    
+    UINavigationController *navController = [[UINavigationController alloc]
+                                              initWithRootViewController:viewController];
 
+    [window setRootViewController:navController];
     [window makeKeyAndVisible];
 
     return YES;

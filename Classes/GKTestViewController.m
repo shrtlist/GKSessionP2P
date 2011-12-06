@@ -20,8 +20,6 @@
 @implementation GKTestViewController
 
 @synthesize gkSession;
-@synthesize peerTableView;
-@synthesize navBar;
 
 #pragma mark - GKSession setup and teardown
 
@@ -31,8 +29,8 @@
     gkSession.delegate = self;
     gkSession.disconnectTimeout = 5;
     gkSession.available = YES;
-
-	navBar.topItem.title = [NSString stringWithFormat:@"GKSession: %@", gkSession.displayName];
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"GKSession: %@", gkSession.displayName];
 }
 
 - (void)teardownSession
@@ -51,15 +49,6 @@
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(setupSession) name:UIApplicationDidBecomeActiveNotification object:nil];
     [defaultCenter addObserver:self selector:@selector(teardownSession) name:UIApplicationDidEnterBackgroundNotification object:nil];
-}
-
-- (void)viewDidUnload
-{
-	// Release any retained subviews of the main view.
-	self.navBar = nil;
-    self.peerTableView = nil;
-	
-	[super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -111,7 +100,7 @@
 			break;
 	}
 	
-	[peerTableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void)session:(GKSession *)session didReceiveConnectionRequestFromPeer:(NSString *)peerID
@@ -120,14 +109,14 @@
 
     [session acceptConnectionFromPeer:peerID error:nil];
 	
-	[peerTableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void)session:(GKSession *)session connectionWithPeerFailed:(NSString *)peerID withError:(NSError *)error
 {
 	NSLog(@"connectionWithPeerFailed: peer: %@, error: %@", [session displayNameForPeer:peerID], error);
 	
-	[peerTableView reloadData];
+	[self.tableView reloadData];
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error
@@ -136,7 +125,7 @@
 	
 	[session disconnectFromAllPeers];
 	
-	[peerTableView reloadData];
+	[self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource protocol methods
