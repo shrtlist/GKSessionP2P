@@ -47,8 +47,16 @@
     [super viewDidLoad];
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self selector:@selector(setupSession) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [defaultCenter addObserver:self selector:@selector(teardownSession) name:UIApplicationDidEnterBackgroundNotification object:nil];
+
+    [defaultCenter addObserver:self 
+                      selector:@selector(setupSession) 
+                          name:UIApplicationDidBecomeActiveNotification 
+                        object:nil];
+
+    [defaultCenter addObserver:self 
+                      selector:@selector(teardownSession) 
+                          name:UIApplicationDidEnterBackgroundNotification 
+                        object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
