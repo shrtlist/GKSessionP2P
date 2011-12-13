@@ -11,10 +11,10 @@ peers will appear in the peer list.
 
 
 ## BUILD REQUIREMENTS:
-iPhone OS 4.0
+iOS 5 SDK (Objective-C ARC enabled)
 
 ## RUNTIME REQUIREMENTS:
-iPhone OS 4.0
+iOS 4.0
 
 ## License
 The source code is available under the Apache License, Version 2.0
