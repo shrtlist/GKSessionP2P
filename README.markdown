@@ -1,6 +1,4 @@
-# GKSessionP2P
-
-## Features
+## GKSessionP2P
 A demo app that illustrates the ad-hoc networking features of iOS GKSession. The app both advertises itself 
 on the local network and automatically connects to available peers, establishing a peer-to-peer network.
 
@@ -9,11 +7,10 @@ Xcode and run it on a device or the simulator. Wait for another application inst
 Devices / simulators must be on the same network or within Bluetooth range to see each other. Connected 
 peers will appear in the peer list.
 
-
-## BUILD REQUIREMENTS:
+## Build requirements:
 iOS 5 SDK (Objective-C ARC enabled)
 
-## RUNTIME REQUIREMENTS:
+## Runtime requirements:
 iOS 4.0
 
 ## License
