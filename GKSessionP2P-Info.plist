@@ -28,9 +28,8 @@
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
-                <string>peer-peer</string>
-        </array>
+		<string>peer-peer</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
