@@ -7,10 +7,10 @@ Xcode and run it on a device or the simulator. Wait for another application inst
 Devices / simulators must be on the same network or within Bluetooth range to see each other. Connected 
 peers will appear in the peer list.
 
-## Build requirements:
+## Build requirements
 iOS 5 SDK (Objective-C ARC enabled)
 
-## Runtime requirements:
+## Runtime requirements
 iOS 4.0
 
 ## License
