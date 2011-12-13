@@ -46,11 +46,13 @@
 {
     [super viewDidLoad];
     
+    [self setupSession];
+    
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 
     [defaultCenter addObserver:self 
                       selector:@selector(setupSession) 
-                          name:UIApplicationDidBecomeActiveNotification 
+                          name:UIApplicationWillEnterForegroundNotification
                         object:nil];
 
     [defaultCenter addObserver:self 
