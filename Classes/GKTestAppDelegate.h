@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-@class GKTestViewController;
-
 @interface GKTestAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
