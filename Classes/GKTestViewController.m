@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 shrtlist.com
+ * Copyright 2012 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,11 +50,14 @@
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 
+    // Register for notifications when the application leaves the background state
+    // on its way to becoming the active application.
     [defaultCenter addObserver:self 
                       selector:@selector(setupSession) 
                           name:UIApplicationWillEnterForegroundNotification
                         object:nil];
 
+    // Register for notifications when when the application enters the background.
     [defaultCenter addObserver:self 
                       selector:@selector(teardownSession) 
                           name:UIApplicationDidEnterBackgroundNotification 
@@ -74,6 +77,9 @@
     }
 }
 
+#pragma mark - Memory management
+
+// Override this method to clean up resources
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -142,6 +148,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    // We have 5 sections in our grouped table view.
 	return 5;
 }
 
