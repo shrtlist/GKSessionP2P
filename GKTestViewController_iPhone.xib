@@ -39,6 +39,7 @@
 				<string key="NSFrameSize">{320, 460}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView"/>
 				<string key="NSReuseIdentifierKey">_NS:418</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">10</int>
@@ -109,9 +110,9 @@ AAgACAAIAAEAAQABAAE</bytes>
 				<int key="IBUISectionIndexMinimumDisplayRowCount">0</int>
 				<bool key="IBUIAllowsSelection">NO</bool>
 				<bool key="IBUIShowsSelectionImmediatelyOnTouchBegin">YES</bool>
-				<float key="IBUIRowHeight">44</float>
-				<float key="IBUISectionHeaderHeight">10</float>
-				<float key="IBUISectionFooterHeight">10</float>
+				<float key="IBUIRowHeight">34</float>
+				<float key="IBUISectionHeaderHeight">8</float>
+				<float key="IBUISectionFooterHeight">8</float>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
