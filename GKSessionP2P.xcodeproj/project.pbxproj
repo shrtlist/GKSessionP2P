@@ -11,10 +11,10 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		2899E5220DE3E06400AC0155 /* GKTestViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* GKTestViewController_iPhone.xib */; };
 		28D7ACF80DDB3853001CB0EB /* GKTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* GKTestViewController.m */; };
+		84117AEE14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */; };
+		84117AF114BC271000C31837 /* GKSessionP2P_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */; };
 		841F17571375ACE300B2ECB6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841F17561375ACE300B2ECB6 /* GameKit.framework */; };
-		8498D8B9148BD92A00A2DD85 /* GKTestViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8498D8B7148BD92A00A2DD85 /* GKTestViewController_iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,13 +24,13 @@
 		1D6058910D05DD3D006BFB54 /* GKSessionP2P.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GKSessionP2P.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2899E5210DE3E06400AC0155 /* GKTestViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GKTestViewController_iPhone.xib; sourceTree = "<group>"; };
 		28D7ACF60DDB3853001CB0EB /* GKTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKTestViewController.h; sourceTree = "<group>"; };
 		28D7ACF70DDB3853001CB0EB /* GKTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKTestViewController.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* GKSessionP2P_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GKSessionP2P_Prefix.pch; sourceTree = "<group>"; };
+		84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GKSessionP2P_iPhone.storyboard; sourceTree = "<group>"; };
+		84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GKSessionP2P_iPad.storyboard; sourceTree = "<group>"; };
 		841F17561375ACE300B2ECB6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		8498D8B7148BD92A00A2DD85 /* GKTestViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GKTestViewController_iPad.xib; sourceTree = "<group>"; };
 		84E90627138718B6008DECAC /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GKSessionP2P-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GKSessionP2P-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,9 +93,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2899E5210DE3E06400AC0155 /* GKTestViewController_iPhone.xib */,
-				8498D8B7148BD92A00A2DD85 /* GKTestViewController_iPad.xib */,
 				8D1107310486CEB800E47090 /* GKSessionP2P-Info.plist */,
+				84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */,
+				84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -163,8 +163,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2899E5220DE3E06400AC0155 /* GKTestViewController_iPhone.xib in Resources */,
-				8498D8B9148BD92A00A2DD85 /* GKTestViewController_iPad.xib in Resources */,
+				84117AEE14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard in Resources */,
+				84117AF114BC271000C31837 /* GKSessionP2P_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +196,7 @@
 				GCC_PREFIX_HEADER = GKSessionP2P_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "GKSessionP2P-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = GKSessionP2P;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -212,7 +212,7 @@
 				GCC_PREFIX_HEADER = GKSessionP2P_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "GKSessionP2P-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = GKSessionP2P;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -230,7 +230,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -246,7 +246,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};
