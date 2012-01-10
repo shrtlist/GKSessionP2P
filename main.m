@@ -18,9 +18,10 @@
 
 #import "GKTestAppDelegate.h"
 
-int main(int argc, char *argv[]) {
-    
-    @autoreleasepool {
+int main(int argc, char *argv[])
+{    
+    @autoreleasepool
+    {
         int retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([GKTestAppDelegate class]));
         return retVal;
     }

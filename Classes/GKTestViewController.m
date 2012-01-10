@@ -223,21 +223,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	static NSString *kCellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 	
     NSInteger state = [indexPath section];
 	NSInteger row = [indexPath row];
-	
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-	
-	if (cell == nil)
-    {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellIdentifier];
-	}
 
 	NSArray *peers = nil;
 
-    switch (state) {
+    switch (state)
+    {
         case GKPeerStateAvailable:
             peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
             break;
