@@ -15,6 +15,9 @@
 		84117AEE14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */; };
 		84117AF114BC271000C31837 /* GKSessionP2P_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */; };
 		841F17571375ACE300B2ECB6 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841F17561375ACE300B2ECB6 /* GameKit.framework */; };
+		84BC297114C3980300146D21 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BC297014C3980200146D21 /* Default@2x.png */; };
+		84BC297514C39A9A00146D21 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */; };
+		84BC297814C39B2C00146D21 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GKSessionP2P_iPhone.storyboard; sourceTree = "<group>"; };
 		84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GKSessionP2P_iPad.storyboard; sourceTree = "<group>"; };
 		841F17561375ACE300B2ECB6 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		84BC297014C3980200146D21 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		84E90627138718B6008DECAC /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GKSessionP2P-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GKSessionP2P-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,6 +77,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */,
+				84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */,
 				84E90627138718B6008DECAC /* README.markdown */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -93,6 +101,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84BC297014C3980200146D21 /* Default@2x.png */,
 				8D1107310486CEB800E47090 /* GKSessionP2P-Info.plist */,
 				84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */,
 				84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */,
@@ -165,6 +174,9 @@
 			files = (
 				84117AEE14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard in Resources */,
 				84117AF114BC271000C31837 /* GKSessionP2P_iPad.storyboard in Resources */,
+				84BC297114C3980300146D21 /* Default@2x.png in Resources */,
+				84BC297514C39A9A00146D21 /* Default-Portrait~ipad.png in Resources */,
+				84BC297814C39B2C00146D21 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
