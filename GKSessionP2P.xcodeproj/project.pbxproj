@@ -77,8 +77,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */,
-				84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */,
 				84E90627138718B6008DECAC /* README.markdown */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -102,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				84BC297014C3980200146D21 /* Default@2x.png */,
+				84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */,
+				84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */,
 				8D1107310486CEB800E47090 /* GKSessionP2P-Info.plist */,
 				84117AED14BC144D00C31837 /* GKSessionP2P_iPhone.storyboard */,
 				84117AF014BC271000C31837 /* GKSessionP2P_iPad.storyboard */,
