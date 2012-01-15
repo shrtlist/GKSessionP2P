@@ -17,6 +17,10 @@
 #import "GKTestViewController.h"
 #import "GKTestAppDelegate.h"
 
+@interface GKTestViewController () // Class extension
+@property (nonatomic, strong) GKSession *gkSession;
+@end
+
 @implementation GKTestViewController
 
 @synthesize gkSession;

@@ -18,6 +18,4 @@
 
 @interface GKTestViewController : UITableViewController <GKSessionDelegate>
 
-@property (nonatomic, strong) GKSession *gkSession;
-
 @end
