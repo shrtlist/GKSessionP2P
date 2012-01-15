@@ -15,7 +15,6 @@
  */
 
 #import "GKTestAppDelegate.h"
-#import "GKTestViewController.h"
 
 @implementation GKTestAppDelegate
 
