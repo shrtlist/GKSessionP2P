@@ -67,6 +67,14 @@
                         object:nil];
 }
 
+- (void)viewDidUnload
+{
+    // Unregister for notifications when the view is unloaded.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewDidUnload];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -78,14 +86,6 @@
     {
         return YES;
     }
-}
-
-#pragma mark - Memory management
-
-// Override this method to clean up resources
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - GKSessionDelegate protocol methods
