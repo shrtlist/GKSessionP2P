@@ -18,6 +18,7 @@
 		84BC297114C3980300146D21 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BC297014C3980200146D21 /* Default@2x.png */; };
 		84BC297514C39A9A00146D21 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */; };
 		84BC297814C39B2C00146D21 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */; };
+		84F12D661620FB6B00426938 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F12D651620FB6B00426938 /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		84E90627138718B6008DECAC /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		84F12D651620FB6B00426938 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* GKSessionP2P-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GKSessionP2P-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +101,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				84F12D651620FB6B00426938 /* Default.png */,
 				84BC297014C3980200146D21 /* Default@2x.png */,
 				84BC297614C39ADE00146D21 /* Default-Landscape~ipad.png */,
 				84BC297414C39A9900146D21 /* Default-Portrait~ipad.png */,
@@ -177,6 +180,7 @@
 				84BC297114C3980300146D21 /* Default@2x.png in Resources */,
 				84BC297514C39A9A00146D21 /* Default-Portrait~ipad.png in Resources */,
 				84BC297814C39B2C00146D21 /* Default-Landscape~ipad.png in Resources */,
+				84F12D661620FB6B00426938 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
