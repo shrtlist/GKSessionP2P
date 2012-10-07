@@ -67,14 +67,6 @@
                         object:nil];
 }
 
-- (void)viewDidUnload
-{
-    // Unregister for notifications when the view is unloaded.
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super viewDidUnload];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -88,7 +80,15 @@
     }
 }
 
-#pragma mark - GKSessionDelegate protocol methods
+#pragma mark - Memory management
+
+- (void)dealloc
+{
+    // Unregister for notifications on deallocation.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - GKSessionDelegate protocol conformance
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state
 {	
@@ -147,7 +147,7 @@
 	[self.tableView reloadData];
 }
 
-#pragma mark - UITableViewDataSource protocol methods
+#pragma mark - UITableViewDataSource protocol conformance
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
