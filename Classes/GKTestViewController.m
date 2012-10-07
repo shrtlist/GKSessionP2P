@@ -151,7 +151,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // We have 5 sections in our grouped table view.
+    // We have 5 sections in our grouped table view,
+    // one for each GKPeerConnectionState
 	return 5;
 }
 
@@ -159,9 +160,10 @@
 {    
     NSString *headerTitle = nil;
     
-    NSInteger state = section;
+    NSInteger peerConnectionState = section;
 
-    switch (state) {
+    switch (peerConnectionState)
+    {
         case GKPeerStateAvailable:
             headerTitle = @"Available Peers";
             break;
@@ -193,9 +195,10 @@
     
     NSArray *peers = nil;
 
-    NSInteger state = section;
+    NSInteger peerConnectionState = section;
 
-    switch (state) {
+    switch (peerConnectionState)
+    {
         case GKPeerStateAvailable:
             peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
             break;
@@ -216,8 +219,9 @@
             peers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
             break;
     }
-    
-    if (peers.count > 0) {
+
+    if (peers.count > 0)
+    {
         rows = peers.count;
     }
 
@@ -228,12 +232,12 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 	
-    NSInteger state = [indexPath section];
+    NSInteger peerConnectionState = [indexPath section];
 	NSInteger row = [indexPath row];
 
 	NSArray *peers = nil;
 
-    switch (state)
+    switch (peerConnectionState)
     {
         case GKPeerStateAvailable:
             peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
@@ -256,7 +260,7 @@
             break;
     }
     
-    if (peers.count > 0)
+    if ((peers.count > 0) && (peers.count > row))
     {
         NSString *peerID = [peers objectAtIndex:row];
         
