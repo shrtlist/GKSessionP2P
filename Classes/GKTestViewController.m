@@ -42,9 +42,9 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 
 - (void)teardownSession
 {
+    [self.gkSession disconnectFromAllPeers];
     self.gkSession.available = NO;
     self.gkSession.delegate = nil;
-    [self.gkSession disconnectFromAllPeers];
 }
 
 #pragma mark - View lifecycle
