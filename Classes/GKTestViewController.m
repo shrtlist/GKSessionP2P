@@ -320,4 +320,16 @@ static NSTimeInterval const kSleepTimeInterval = 0.5;
 	return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    NSString *title = nil;
+
+    if (section == 4)
+    {
+        title = @"Note that states are not mutually exclusive. For example, a peer can be available for other peers to discover while it is attempting to connect to another peer.";
+    }
+    
+    return title;
+}
+
 @end
