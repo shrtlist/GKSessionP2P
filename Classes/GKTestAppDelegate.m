@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 shrtlist.com
+ * Copyright 2013 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,5 @@
 #import "GKTestAppDelegate.h"
 
 @implementation GKTestAppDelegate
-
-@synthesize window;
 
 @end

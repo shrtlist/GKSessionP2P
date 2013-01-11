@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 shrtlist.com
+ * Copyright 2013 shrtlist.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,25 +22,28 @@
 
 @implementation GKTestViewController
 
-@synthesize gkSession;
+// Non-global constants
+static NSTimeInterval const kConnectionTimeout = 5.0;
+static NSTimeInterval const kDisconnectTimeout = 5.0;
+static NSTimeInterval const kSleepTimeInterval = 0.5;
 
 #pragma mark - GKSession setup and teardown
 
 - (void)setupSession
 {
     self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
-    gkSession.delegate = self;
-    gkSession.disconnectTimeout = 5;
-    gkSession.available = YES;
+    self.gkSession.delegate = self;
+    self.gkSession.disconnectTimeout = kDisconnectTimeout;
+    self.gkSession.available = YES;
     
-    self.navigationItem.title = [NSString stringWithFormat:@"GKSession: %@", gkSession.displayName];
+    self.title = [NSString stringWithFormat:@"GKSession: %@", self.gkSession.displayName];
 }
 
 - (void)teardownSession
 {
-    gkSession.available = NO;
-    gkSession.delegate = nil;
-    [gkSession disconnectFromAllPeers];
+    self.gkSession.available = NO;
+    self.gkSession.delegate = nil;
+    [self.gkSession disconnectFromAllPeers];
 }
 
 #pragma mark - View lifecycle
@@ -95,28 +98,38 @@
 	switch (state)
 	{
 		case GKPeerStateAvailable:
+        {
 			NSLog(@"didChangeState: peer %@ available", [session displayNameForPeer:peerID]);
 
-            [NSThread sleepForTimeInterval:0.5];
+            [NSThread sleepForTimeInterval:kSleepTimeInterval];
 
-			[session connectToPeer:peerID withTimeout:5];
+			[session connectToPeer:peerID withTimeout:kConnectionTimeout];
 			break;
+        }
 			
 		case GKPeerStateUnavailable:
+        {
 			NSLog(@"didChangeState: peer %@ unavailable", [session displayNameForPeer:peerID]);
 			break;
+        }
 			
 		case GKPeerStateConnected:
+        {
 			NSLog(@"didChangeState: peer %@ connected", [session displayNameForPeer:peerID]);
 			break;
+        }
 			
 		case GKPeerStateDisconnected:
+        {
 			NSLog(@"didChangeState: peer %@ disconnected", [session displayNameForPeer:peerID]);
 			break;
+        }
 			
 		case GKPeerStateConnecting:
+        {
 			NSLog(@"didChangeState: peer %@ connecting", [session displayNameForPeer:peerID]);
 			break;
+        }
 	}
 	
 	[self.tableView reloadData];
@@ -156,6 +169,59 @@
 	return 5;
 }
 
+- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger rows;
+    
+    NSInteger peerConnectionState = section;
+    
+    switch (peerConnectionState)
+    {
+        case GKPeerStateAvailable:
+        {
+            NSArray *availablePeers = [self.gkSession peersWithConnectionState:GKPeerStateAvailable];
+            rows = availablePeers.count;
+            break;
+        }
+
+        case GKPeerStateConnecting:
+        {
+            NSArray *connectingPeers = [self.gkSession peersWithConnectionState:GKPeerStateConnecting];
+            rows = connectingPeers.count;
+            break;
+        }
+            
+        case GKPeerStateConnected:
+        {
+            NSArray *connectedPeers = [self.gkSession peersWithConnectionState:GKPeerStateConnected];
+            rows = connectedPeers.count;
+            break;
+        }
+            
+        case GKPeerStateDisconnected:
+        {
+            NSArray *disconnectedPeers = [self.gkSession peersWithConnectionState:GKPeerStateDisconnected];
+            rows = disconnectedPeers.count;
+            break;
+        }
+            
+        case GKPeerStateUnavailable:
+        {
+            NSArray *unavailablePeers = [self.gkSession peersWithConnectionState:GKPeerStateUnavailable];
+            rows = unavailablePeers.count;
+            break;
+        }
+    }
+    
+    // Always show at least 1 row for each GKPeerConnectionState.
+    if (rows < 1)
+    {
+        rows = 1;
+    }
+    
+	return rows;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {    
     NSString *headerTitle = nil;
@@ -165,99 +231,80 @@
     switch (peerConnectionState)
     {
         case GKPeerStateAvailable:
+        {
             headerTitle = @"Available Peers";
             break;
+        }
             
         case GKPeerStateConnecting:
+        {
             headerTitle = @"Connecting Peers";
             break;
+        }
 
         case GKPeerStateConnected:
+        {
             headerTitle = @"Connected Peers";
             break;
-            
+        }
+
         case GKPeerStateDisconnected:
+        {
             headerTitle = @"Disconnected Peers";
             break;
+        }
             
         case GKPeerStateUnavailable:
+        {
             headerTitle = @"Unavailable Peers";
             break;
+        }
     }
 	
 	return headerTitle;
 }
 
-- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
-{
-    // Always show at least 1 row.
-    NSInteger rows = 1;
-    
-    NSArray *peers = nil;
-
-    NSInteger peerConnectionState = section;
-
-    switch (peerConnectionState)
-    {
-        case GKPeerStateAvailable:
-            peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
-            break;
-
-        case GKPeerStateConnecting:
-            peers = [gkSession peersWithConnectionState:GKPeerStateConnecting];
-            break;
-            
-        case GKPeerStateConnected:
-            peers = [gkSession peersWithConnectionState:GKPeerStateConnected];
-            break;
-            
-        case GKPeerStateDisconnected:
-            peers = [gkSession peersWithConnectionState:GKPeerStateDisconnected];
-            break;
-            
-        case GKPeerStateUnavailable:
-            peers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
-            break;
-    }
-
-    if (peers.count > 0)
-    {
-        rows = peers.count;
-    }
-
-	return rows;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    cell.textLabel.text = @"None";
 	
-    NSInteger peerConnectionState = [indexPath section];
-	NSInteger row = [indexPath row];
+    NSInteger peerConnectionState = indexPath.section;
+	NSInteger row = indexPath.row;
 
 	NSArray *peers = nil;
 
     switch (peerConnectionState)
     {
         case GKPeerStateAvailable:
-            peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
+        {
+            peers = [self.gkSession peersWithConnectionState:GKPeerStateAvailable];
             break;
+        }
             
         case GKPeerStateConnecting:
-            peers = [gkSession peersWithConnectionState:GKPeerStateConnecting];
+        {
+            peers = [self.gkSession peersWithConnectionState:GKPeerStateConnecting];
             break;
+        }
             
         case GKPeerStateConnected:
-            peers = [gkSession peersWithConnectionState:GKPeerStateConnected];
+        {
+            peers = [self.gkSession peersWithConnectionState:GKPeerStateConnected];
             break;
+        }
             
         case GKPeerStateDisconnected:
-            peers = [gkSession peersWithConnectionState:GKPeerStateDisconnected];
+        {
+            peers = [self.gkSession peersWithConnectionState:GKPeerStateDisconnected];
             break;
+        }
             
         case GKPeerStateUnavailable:
-            peers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
+        {
+            peers = [self.gkSession peersWithConnectionState:GKPeerStateUnavailable];
             break;
+        }
     }
     
     if ((peers.count > 0) && (peers.count > row))
@@ -266,12 +313,8 @@
         
         if (peerID)
         {
-            cell.textLabel.text = [gkSession displayNameForPeer:peerID];
+            cell.textLabel.text = [self.gkSession displayNameForPeer:peerID];
         }
-    }
-    else
-    {
-        cell.textLabel.text = @"None";
     }
 	
 	return cell;
