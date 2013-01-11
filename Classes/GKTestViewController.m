@@ -26,6 +26,7 @@
 static NSTimeInterval const kConnectionTimeout = 5.0;
 static NSTimeInterval const kDisconnectTimeout = 5.0;
 static NSTimeInterval const kSleepTimeInterval = 0.5;
+static NSString *const kSectionFooterTitle = @"Note that states are not mutually exclusive. For example, a peer can be available for other peers to discover while it is attempting to connect to another peer.";
 
 #pragma mark - GKSession setup and teardown
 
@@ -326,7 +327,7 @@ static NSTimeInterval const kSleepTimeInterval = 0.5;
 
     if (section == 4)
     {
-        title = @"Note that states are not mutually exclusive. For example, a peer can be available for other peers to discover while it is attempting to connect to another peer.";
+        title = kSectionFooterTitle;
     }
     
     return title;
