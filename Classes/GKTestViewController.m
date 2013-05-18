@@ -325,7 +325,7 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 {
     NSString *title = nil;
 
-    if (section == 4)
+    if (section == GKPeerStateConnecting)
     {
         title = kSectionFooterTitle;
     }
