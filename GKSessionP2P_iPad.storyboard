@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="o7m-vm-QMw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="o7m-vm-QMw">
     <dependencies>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Test View Controller-->
         <scene sceneID="0gJ-Zd-vFu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ROY-mH-HC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="XES-iz-HiY" customClass="GKTestViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Rmy-Ln-qN7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Rmy-Ln-qN7">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -40,12 +39,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="kLg-n2-LU3"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ROY-mH-HC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="961" y="-88"/>
         </scene>
+        <!--Navigation Controller-->
         <scene sceneID="ubK-D3-vLZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sPX-Uy-QLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="o7m-vm-QMw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vz8-2Z-3ry">
@@ -57,6 +57,7 @@
                         <segue destination="XES-iz-HiY" kind="relationship" relationship="rootViewController" id="kXs-8G-9p0"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sPX-Uy-QLH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-13" y="-88"/>
         </scene>
