@@ -271,7 +271,6 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     cell.textLabel.text = @"None";
 	
     NSInteger peerConnectionState = indexPath.section;
-	NSInteger row = indexPath.row;
 
 	NSArray *peers = nil;
 
@@ -307,10 +306,12 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
             break;
         }
     }
+
+	NSInteger peerIndex = indexPath.row;
     
-    if ((peers.count > 0) && (peers.count > row))
+    if ((peers.count > 0) && (peerIndex < peers.count))
     {
-        NSString *peerID = [peers objectAtIndex:row];
+        NSString *peerID = [peers objectAtIndex:peerIndex];
         
         if (peerID)
         {
