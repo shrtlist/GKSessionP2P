@@ -1,5 +1,5 @@
 ## GKSessionP2P
-A Universal (iPhone/iPad) Xcode storyboard project that illustrates the ad-hoc networking features of GKSession. The app both advertises itself on the local network and automatically connects to available peers, establishing a peer-to-peer network.
+A Universal (iPhone/iPad) Xcode storyboard project that illustrates the ad-hoc networking features of `GKSession`. The app both advertises itself on the local network and automatically connects to available peers, establishing a peer-to-peer network.
 
 Please note: Bluetooth networking is not supported in Simulator.
 
