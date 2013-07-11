@@ -16,11 +16,10 @@
 
 #import "GKTestViewController.h"
 
-@interface GKTestViewController () // Class extension
-@property (nonatomic, strong) GKSession *gkSession;
-@end
-
 @implementation GKTestViewController
+{
+    GKSession *gkSession;
+}
 
 // Non-global constants
 static NSTimeInterval const kConnectionTimeout = 5.0;
@@ -32,19 +31,19 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 
 - (void)setupSession
 {
-    self.gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
-    self.gkSession.delegate = self;
-    self.gkSession.disconnectTimeout = kDisconnectTimeout;
-    self.gkSession.available = YES;
+    gkSession = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
+    gkSession.delegate = self;
+    gkSession.disconnectTimeout = kDisconnectTimeout;
+    gkSession.available = YES;
     
-    self.title = [NSString stringWithFormat:@"GKSession: %@", self.gkSession.displayName];
+    self.title = [NSString stringWithFormat:@"GKSession: %@", gkSession.displayName];
 }
 
 - (void)teardownSession
 {
-    [self.gkSession disconnectFromAllPeers];
-    self.gkSession.available = NO;
-    self.gkSession.delegate = nil;
+    [gkSession disconnectFromAllPeers];
+    gkSession.available = NO;
+    gkSession.delegate = nil;
 }
 
 #pragma mark - View lifecycle
@@ -180,35 +179,35 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     {
         case GKPeerStateAvailable:
         {
-            NSArray *availablePeers = [self.gkSession peersWithConnectionState:GKPeerStateAvailable];
+            NSArray *availablePeers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
             rows = availablePeers.count;
             break;
         }
 
         case GKPeerStateConnecting:
         {
-            NSArray *connectingPeers = [self.gkSession peersWithConnectionState:GKPeerStateConnecting];
+            NSArray *connectingPeers = [gkSession peersWithConnectionState:GKPeerStateConnecting];
             rows = connectingPeers.count;
             break;
         }
             
         case GKPeerStateConnected:
         {
-            NSArray *connectedPeers = [self.gkSession peersWithConnectionState:GKPeerStateConnected];
+            NSArray *connectedPeers = [gkSession peersWithConnectionState:GKPeerStateConnected];
             rows = connectedPeers.count;
             break;
         }
             
         case GKPeerStateDisconnected:
         {
-            NSArray *disconnectedPeers = [self.gkSession peersWithConnectionState:GKPeerStateDisconnected];
+            NSArray *disconnectedPeers = [gkSession peersWithConnectionState:GKPeerStateDisconnected];
             rows = disconnectedPeers.count;
             break;
         }
             
         case GKPeerStateUnavailable:
         {
-            NSArray *unavailablePeers = [self.gkSession peersWithConnectionState:GKPeerStateUnavailable];
+            NSArray *unavailablePeers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
             rows = unavailablePeers.count;
             break;
         }
@@ -278,31 +277,31 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     {
         case GKPeerStateAvailable:
         {
-            peers = [self.gkSession peersWithConnectionState:GKPeerStateAvailable];
+            peers = [gkSession peersWithConnectionState:GKPeerStateAvailable];
             break;
         }
             
         case GKPeerStateConnecting:
         {
-            peers = [self.gkSession peersWithConnectionState:GKPeerStateConnecting];
+            peers = [gkSession peersWithConnectionState:GKPeerStateConnecting];
             break;
         }
             
         case GKPeerStateConnected:
         {
-            peers = [self.gkSession peersWithConnectionState:GKPeerStateConnected];
+            peers = [gkSession peersWithConnectionState:GKPeerStateConnected];
             break;
         }
             
         case GKPeerStateDisconnected:
         {
-            peers = [self.gkSession peersWithConnectionState:GKPeerStateDisconnected];
+            peers = [gkSession peersWithConnectionState:GKPeerStateDisconnected];
             break;
         }
             
         case GKPeerStateUnavailable:
         {
-            peers = [self.gkSession peersWithConnectionState:GKPeerStateUnavailable];
+            peers = [gkSession peersWithConnectionState:GKPeerStateUnavailable];
             break;
         }
     }
@@ -315,7 +314,7 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
         
         if (peerID)
         {
-            cell.textLabel.text = [self.gkSession displayNameForPeer:peerID];
+            cell.textLabel.text = [gkSession displayNameForPeer:peerID];
         }
     }
 	
