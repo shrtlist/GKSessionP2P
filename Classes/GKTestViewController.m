@@ -171,7 +171,7 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger rows;
+    NSInteger rows = 0;
     
     NSInteger peerConnectionState = section;
     
