@@ -56,17 +56,15 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
 
-    // Register for notifications when the application leaves the background state
-    // on its way to becoming the active application.
+    // Register for notifications
     [defaultCenter addObserver:self 
                       selector:@selector(setupSession) 
-                          name:UIApplicationWillEnterForegroundNotification
+                          name:UIApplicationDidBecomeActiveNotification
                         object:nil];
 
-    // Register for notifications when when the application enters the background.
     [defaultCenter addObserver:self 
                       selector:@selector(teardownSession) 
-                          name:UIApplicationDidEnterBackgroundNotification 
+                          name:UIApplicationWillResignActiveNotification
                         object:nil];
 }
 
