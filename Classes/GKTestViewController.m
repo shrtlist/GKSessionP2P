@@ -56,13 +56,15 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     // Register for notifications
     [defaultCenter addObserver:self 
                       selector:@selector(setupSession) 
-                          name:UIApplicationDidBecomeActiveNotification
+                          name:UIApplicationWillEnterForegroundNotification
                         object:nil];
 
     [defaultCenter addObserver:self 
                       selector:@selector(teardownSession) 
-                          name:UIApplicationWillResignActiveNotification
+                          name:UIApplicationDidEnterBackgroundNotification
                         object:nil];
+    
+    [self setupSession];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
