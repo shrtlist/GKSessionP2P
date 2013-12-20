@@ -22,9 +22,8 @@
 }
 
 // Non-global constants
-static NSTimeInterval const kConnectionTimeout = 5.0;
+static NSTimeInterval const kConnectionTimeout = 30.0;
 static NSTimeInterval const kDisconnectTimeout = 5.0;
-static NSTimeInterval const kSleepTimeInterval = 0.5;
 static NSString *const kSectionFooterTitle = @"Note that states are not mutually exclusive. For example, a peer can be available for other peers to discover while it is attempting to connect to another peer.";
 
 #pragma mark - GKSession setup and teardown
@@ -99,10 +98,19 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 		case GKPeerStateAvailable:
         {
 			NSLog(@"didChangeState: peer %@ available", [session displayNameForPeer:peerID]);
-
-            [NSThread sleepForTimeInterval:kSleepTimeInterval];
-
-			[session connectToPeer:peerID withTimeout:kConnectionTimeout];
+            
+            BOOL shouldInvite = ([_session.peerID hash] > [peerID hash]);
+            
+            if (shouldInvite)
+            {
+                NSLog(@"Inviting %@", peerID);
+                [session connectToPeer:peerID withTimeout:kConnectionTimeout];
+            }
+            else
+            {
+                NSLog(@"Not inviting %@", peerID);
+            }
+            
 			break;
         }
 			
