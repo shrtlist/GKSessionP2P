@@ -35,8 +35,6 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     _session.delegate = self;
     _session.disconnectTimeout = kDisconnectTimeout;
     _session.available = YES;
-    
-    self.title = [NSString stringWithFormat:@"GKSession: %@", _session.displayName];
 }
 
 - (void)teardownSession
@@ -65,6 +63,8 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
                         object:nil];
     
     [self setupSession];
+
+    self.title = [NSString stringWithFormat:@"GKSession: %@", _session.displayName];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
