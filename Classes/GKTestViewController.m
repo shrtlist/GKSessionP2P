@@ -94,12 +94,14 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 #pragma mark - GKSessionDelegate protocol conformance
 
 - (void)session:(GKSession *)session peer:(NSString *)peerID didChangeState:(GKPeerConnectionState)state
-{	
+{
+    NSString *peerName = [session displayNameForPeer:peerID];
+
 	switch (state)
 	{
 		case GKPeerStateAvailable:
         {
-			NSLog(@"didChangeState: peer %@ available", [session displayNameForPeer:peerID]);
+			NSLog(@"didChangeState: peer %@ available", peerName);
             
             BOOL shouldInvite = ([_session.peerID hash] > [peerID hash]);
             
@@ -118,25 +120,25 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 			
 		case GKPeerStateUnavailable:
         {
-			NSLog(@"didChangeState: peer %@ unavailable", [session displayNameForPeer:peerID]);
+			NSLog(@"didChangeState: peer %@ unavailable", peerName);
 			break;
         }
 			
 		case GKPeerStateConnected:
         {
-			NSLog(@"didChangeState: peer %@ connected", [session displayNameForPeer:peerID]);
+			NSLog(@"didChangeState: peer %@ connected", peerName);
 			break;
         }
 			
 		case GKPeerStateDisconnected:
         {
-			NSLog(@"didChangeState: peer %@ disconnected", [session displayNameForPeer:peerID]);
+			NSLog(@"didChangeState: peer %@ disconnected", peerName);
 			break;
         }
 			
 		case GKPeerStateConnecting:
         {
-			NSLog(@"didChangeState: peer %@ connecting", [session displayNameForPeer:peerID]);
+			NSLog(@"didChangeState: peer %@ connecting", peerName);
 			break;
         }
 	}
