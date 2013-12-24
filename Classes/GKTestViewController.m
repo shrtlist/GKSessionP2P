@@ -23,7 +23,6 @@
 
 // Non-global constants
 static NSTimeInterval const kConnectionTimeout = 30.0;
-static NSTimeInterval const kDisconnectTimeout = 5.0;
 static NSString *const kSectionFooterTitle = @"Note that states are not mutually exclusive. For example, a peer can be available for other peers to discover while it is attempting to connect to another peer.";
 
 #pragma mark - View lifecycle
@@ -81,7 +80,6 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     // GKSessionModePeer: a peer advertises like a server and searches like a client.
     _session = [[GKSession alloc] initWithSessionID:nil displayName:nil sessionMode:GKSessionModePeer];
     _session.delegate = self;
-    _session.disconnectTimeout = kDisconnectTimeout;
     _session.available = YES;
 }
 
