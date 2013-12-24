@@ -148,7 +148,14 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 {
 	NSLog(@"didReceiveConnectionRequestFromPeer: %@", [session displayNameForPeer:peerID]);
 
-    [session acceptConnectionFromPeer:peerID error:nil];
+    NSError *error;
+    
+    BOOL connectionEstablished = [session acceptConnectionFromPeer:peerID error:&error];
+    
+    if (!connectionEstablished)
+    {
+        NSLog(@"error = %@", error);
+    }    
 	
 	[self.tableView reloadData];
 }
