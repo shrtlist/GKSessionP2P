@@ -71,7 +71,7 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     // Nil out delegate
-    self.session.delegate = nil;
+    _session.delegate = nil;
 }
 
 #pragma mark - GKSession setup and teardown
