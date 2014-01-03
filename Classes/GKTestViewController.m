@@ -101,8 +101,8 @@ static NSString *const kSectionFooterTitle = @"Note that states are not mutually
 		case GKPeerStateAvailable:
         {
 			NSLog(@"didChangeState: peer %@ available", peerName);
-            
-            BOOL shouldInvite = ([self.session.peerID hash] > [peerID hash]);
+
+            BOOL shouldInvite = ([self.session.displayName compare:peerName] == NSOrderedDescending);
             
             if (shouldInvite)
             {
